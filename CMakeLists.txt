@@ -18,3 +18,4 @@ SET(ALL_TEST_FILES ./test/symbolic_execute.cpp)
 add_executable(all-tests ${ALL_TEST_FILES})
 
 target_link_libraries(all-tests unsynthesize)
+target_link_libraries(all-tests coreir coreir-rtlil coreir-commonlib)
