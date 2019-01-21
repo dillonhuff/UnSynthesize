@@ -82,7 +82,6 @@ namespace UnSynth {
     sim.setValue("self.input_a", BitVector(32, 1));
     sim.setValue("self.input_a_stb", BitVector(1, 0));
 
-    //sim.setValue("self.input_b", BitVector(32, 2));
     sim.setValue("self.input_b_stb", BitVector(1, 1));
     
     cout << "b_ack = " << sim.getBitVec("self.input_b_ack") << endl;        
@@ -98,7 +97,7 @@ namespace UnSynth {
 
       cout << "b_ack = " << sim.getBitVec("self.input_b_ack") << endl;    
       cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
-
+      cout << "z_out = " << sim.getBitVec("self.output_z") << endl;
     }
 
     REQUIRE(true);
