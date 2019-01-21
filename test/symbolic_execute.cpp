@@ -60,6 +60,34 @@ namespace UnSynth {
     sim.setValue("self.output_z_ack", BitVector(1, 0));            
     sim.execute();
 
+    cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
+    cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
+    
+    sim.setValue("self.rst", BitVector(1, 0));
+    sim.setClock("self.clk", 0, 1);
+    sim.setValue("self.input_a", BitVector(32, 1));
+    sim.setValue("self.input_a_stb", BitVector(1, 1));
+    sim.execute();
+
+    cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
+    cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
+    
+    sim.setClock("self.clk", 0, 1);
+    sim.setValue("self.input_a", BitVector(32, 1));
+    sim.setValue("self.input_a_stb", BitVector(1, 1));
+    sim.execute();
+
+    cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
+    cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
+    
+    sim.setClock("self.clk", 0, 1);
+    sim.setValue("self.input_a", BitVector(32, 1));
+    sim.setValue("self.input_a_stb", BitVector(1, 1));
+    sim.execute();
+
+    cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
+    cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
+
     REQUIRE(true);
   }
 
