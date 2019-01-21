@@ -60,6 +60,7 @@ namespace UnSynth {
     sim.setValue("self.output_z_ack", BitVector(1, 0));            
     sim.execute();
 
+    cout << "b_ack = " << sim.getBitVec("self.input_b_ack") << endl;        
     cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
     cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
     
@@ -69,24 +70,36 @@ namespace UnSynth {
     sim.setValue("self.input_a_stb", BitVector(1, 1));
     sim.execute();
 
+    cout << "b_ack = " << sim.getBitVec("self.input_b_ack") << endl;        
     cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
     cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
     
+    REQUIRE(sim.getBitVec("self.input_a_ack") == BitVector(1, 1));
+
     sim.setClock("self.clk", 0, 1);
-    sim.setValue("self.input_a", BitVector(32, 1));
-    sim.setValue("self.input_a_stb", BitVector(1, 1));
     sim.execute();
 
+    sim.setValue("self.input_a", BitVector(32, 1));
+    sim.setValue("self.input_a_stb", BitVector(1, 0));
+
+    //sim.setValue("self.input_b", BitVector(32, 2));
+    sim.setValue("self.input_b_stb", BitVector(1, 1));
+    
+    cout << "b_ack = " << sim.getBitVec("self.input_b_ack") << endl;        
     cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
     cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
     
-    sim.setClock("self.clk", 0, 1);
-    sim.setValue("self.input_a", BitVector(32, 1));
-    sim.setValue("self.input_a_stb", BitVector(1, 1));
-    sim.execute();
+    for (int i = 0; i < 30; i++) {
+    
+      sim.setClock("self.clk", 0, 1);
+      sim.execute();
 
-    cout << "a_ack = " << sim.getBitVec("self.input_a_ack") << endl;    
-    cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
+      cout << "State = " << sim.getRegister("__DOLLAR__procdff__DOLLAR__711$reg0") << endl;
+
+      cout << "b_ack = " << sim.getBitVec("self.input_b_ack") << endl;    
+      cout << "z_stb = " << sim.getBitVec("self.output_z_stb") << endl;
+
+    }
 
     REQUIRE(true);
   }
